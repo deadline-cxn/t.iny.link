@@ -1,0 +1,5 @@
+RewriteEngine on
+# # #RewriteCond %{HTTP_HOST} ^iny\.link$ [OR]
+RewriteRule ^/?$ "http\:\/\/iny.link" [R=301,L]
+
+

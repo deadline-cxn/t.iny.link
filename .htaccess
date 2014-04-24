@@ -1,5 +1,4 @@
 RewriteEngine on
-# # #RewriteCond %{HTTP_HOST} ^iny\.link$ [OR]
-RewriteRule ^/?$ "http\:\/\/iny.link" [R=301,L]
-
-
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php?q=$1 [L,QSA]

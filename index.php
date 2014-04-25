@@ -2,9 +2,10 @@
 $db = new mysqli("localhost", "sethcode_iny", "inylink", "sethcode_iny");
 if($db->connect_errno > 0){ die('Unable to connect to database [' . $db->connect_error . ']'); }
 $url=$_REQUEST['url'];
-$codepool="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_.";
+
 
 function inc_c($code,$codeloc) {
+	$codepool="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_.";
 	echo "code[$code]<br>";
 	echo "codepool[$codepool]<br>";
 	$x=strpos($codepool,$code[$codeloc]);
@@ -22,11 +23,11 @@ if(!empty($url)) {
 	}
 	$x=strlen($code);
 	echo "code_length:[$x]<br>";
-	echo "codepool[$codepool]<br>";
-	$codeloc=strpos($codepool,$code);
-	echo "codeloc[$codeloc]<br>";
-	$newcodeloc=$codeloc+1;
-	echo "newcodeloc[$newcodeloc]<br>";
+	// echo "codepool[$codepool]<br>";
+	// $codeloc=strpos($codepool,$code);
+	// echo "codeloc[$codeloc]<br>";
+	// $newcodeloc=$codeloc+1;
+	// echo "newcodeloc[$newcodeloc]<br>";
 	
 	
 	$code=inc_c($code,$x);

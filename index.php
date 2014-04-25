@@ -54,7 +54,20 @@ if(!empty($url)) {
 	echo "old_code[$code]<br>";
 	$code=inc_c($code,strlen($code)-1);
 	echo "new_code[$code]<br>";
-		
+	$url=addslashes($url);
+	$result=$db->query("select * from `link` where `url`='$url'");	
+	$lnk=$result->fetch_object();
+	if(empty($lnk->code)) {
+		$result=$db->query("insert into `link` (`url`,`code`) 
+										values  ('$url','$code');");
+		$result=$db->query("update `system` set `val`='$code' where `var`='code'");
+	} else {
+		$code=$lnk->code;
+	}
+	$result=$db->query("select * from `link` where `code`='$code'");
+	$lnk=$result->fetch_object();
+	
+	echo " OUTLINK:<br>$lnk->url<br>$lnk->code<br>";
 	
 /*	code
 	url

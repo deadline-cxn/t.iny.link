@@ -24,12 +24,12 @@ if(!empty($url)) {
 	}
 	$x=strlen($code);
 	echo "code_length:[$x]<br>";
+	$x--;
 	// echo "codepool[$codepool]<br>";
 	// $codeloc=strpos($codepool,$code);
 	// echo "codeloc[$codeloc]<br>";
 	// $newcodeloc=$codeloc+1;
 	// echo "newcodeloc[$newcodeloc]<br>";
-	
 	
 	$code=inc_c($code,$x);
 	

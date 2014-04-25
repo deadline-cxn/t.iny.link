@@ -1,17 +1,19 @@
 <?
-$link = mysqli_connect("localhost", "sethcode_iny", "inylink", "sethcode_iny");
-if(mysqli_connect_errno()) {
-	printf("Connect failed: %s\n", mysqli_connect_error());
-	exit();
-}
-// if(mysqli_query($link, "CREATE TEMPORARY TABLE myCity LIKE City") === TRUE) { 	printf("Table myCity successfully created.\n"); }
-if($result = mysqli_query($link, "SELECT Name FROM City LIMIT 10")) { 	printf("Select returned %d rows.\n", mysqli_num_rows($result)); 	mysqli_free_result($result); }
-if($result = mysqli_query($link, "SELECT * FROM City", MYSQLI_USE_RESULT)) {     if(!mysqli_query($link, "SET @a:='this will not work'")) {         printf("Error: %s\n", mysqli_error($link));    }     mysqli_free_result($result);}
-// mysqli_close($link);
+$db = new mysqli("localhost", "sethcode_iny", "inylink", "sethcode_iny");
+if($db->connect_errno > 0){ die('Unable to connect to database [' . $db->connect_error . ']'); }
+
 
 $url=$_REQUEST['url'];
 if(!empty($url)) {
 	echo "[$url]";
+	$result = $db->query("select * from `system` where `var`='code'");
+	while($row = $result->fetch_assoc()){ echo $row['var'] . " = " . $row['val'] . '<br />'; }
+	
+/*	code
+	url
+	hits
+	submit_ip
+	submit_date */
 	
 }
 else {
@@ -30,6 +32,6 @@ else {
 	}
 }
 
-
+$db->close();
 
 ?>

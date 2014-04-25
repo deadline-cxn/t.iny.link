@@ -8,6 +8,7 @@ function inc_c($code,$codeloc) {
 	$codepool="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_.";
 	echo "code[$code]<br>";
 	echo "codepool[$codepool]<br>";
+	echo "what[".$code[$codeloc]."]<br>";
 	$x=strpos($codepool,$code[$codeloc]);
 	$x++;
 	echo "Old[".$codepool[$x-1]."] <br>";

@@ -41,33 +41,32 @@ if(!empty($url)) {
 	}
 	else {
 		echo "Does not exist<br>";
-	}
-	
-	
-	
-	
-	$result = $db->query("select * from `system` where `var`='code'");
-	while($row = $result->fetch_assoc()){
-		echo $row['var'] . " = [" . $row['val'] ."]<br>";
-		$code=$row['val'];
-	}
-	echo "old_code[$code]<br>";
-	$code=inc_c($code,strlen($code)-1);
-	echo "new_code[$code]<br>";
-	$url=addslashes($url);
-	$result=$db->query("select * from `link` where `url`='$url'");	
-	$lnk=$result->fetch_object();
-	if(empty($lnk->code)) {
-		$result=$db->query("insert into `link` (`url`,`code`) 
-										values  ('$url','$code');");
-		$result=$db->query("update `system` set `val`='$code' where `var`='code'");
-	} else {
-		$code=$lnk->code;
+
+		$result = $db->query("select * from `system` where `var`='code'");
+		while($row = $result->fetch_assoc()){
+			echo $row['var'] . " = [" . $row['val'] ."]<br>";
+			$code=$row['val'];
+		}
+		echo "old_code[$code]<br>";
+		$code=inc_c($code,strlen($code)-1);
+		echo "new_code[$code]<br>";
+		$url=addslashes($url);
+		$result=$db->query("select * from `link` where `url`='$url'");	
+		$lnk=$result->fetch_object();
+		if(empty($lnk->code)) {
+			$result=$db->query("insert into `link` (`url`,`code`) 
+											values  ('$url','$code');");
+			$result=$db->query("update `system` set `val`='$code' where `var`='code'");
+		} else {
+			$code=$lnk->code;
+		}
 	}
 	$result=$db->query("select * from `link` where `code`='$code'");
 	$lnk=$result->fetch_object();
 	
 	echo " OUTLINK:<br>$lnk->url<br>$lnk->code<br>";
+	echo "iny.link url:<br>";
+	echo "<a href=http://iny.link/$lnk->code>http://iny.link/$lnk->code</a><br>";
 	
 /*	code
 	url
@@ -82,13 +81,19 @@ else {
 	$page_url.='://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
 	$xpage=explode("/",$page_url);
 	$link=$xpage[count($xpage)-1];
+	
 	if(empty($link)) {
 		echo "Make a tiny link:<br>";
 		echo "<form method=post>LONG URL: <input name=url><input type=submit></form>";
 		echo "Copyright (C)2014 Seth Parson<br>";
 	}
 	else {
-		echo $link;
+		$result=$db->query("select * from `link` where `code`='$code'");
+		$lnk=$result->fetch_object();
+		
+		echo " OUTLINK:<br>$lnk->url<br>$lnk->code<br>";
+		echo "iny.link url:<br>";
+		echo "<a href=http://iny.link/$lnk->code>http://iny.link/$lnk->code</a><br>";
 	}
 }
 

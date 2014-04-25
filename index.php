@@ -37,10 +37,10 @@ if(!empty($url)) {
 	$result = $db->query("select * from `link` where `url`='$url'");
 	$lnk=$result->fetch_object();
 	if(!empty($lnk->url)) {
-		echo "Exists!";
+		echo "Exists!<br>";
 	}
 	else {
-		echo "Does not exist";
+		echo "Does not exist<br>";
 	}
 	
 	

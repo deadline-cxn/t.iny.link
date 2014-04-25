@@ -5,7 +5,7 @@ $url=$_REQUEST['url'];
 $codepool="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_.";
 
 function inc_c($code,$codeloc) {
-	$x=strpos($codepool,$code[$codeloc]);	
+	$x=strpos($codepool,$code[$codeloc],"");
 	$x++;
 	echo "Old[".$codepool[$x-1]."] <br>";
 	echo "New[".$codepool[$x]."] <br>";
@@ -26,7 +26,8 @@ if(!empty($url)) {
 	$newcodeloc=$codeloc+1;
 	echo "newcodeloc[$newcodeloc]<br>";
 	
-	$code=inc_c($code,$codeloc);
+	
+	$code=inc_c($code,$x);
 	
 	
 	

@@ -69,7 +69,23 @@ else {
 	$code=$xpage[count($xpage)-1];
 	
 	if(empty($code)) {
-		echo "<html><head><title>iny.link - shorten your urls</title></head><body>";
+		echo "<html><head>";
+		echo "<title>iny.link - shorten your urls</title>";
+		echo "<link rel=\"stylesheet\" href=\"t.css\" type=\"text/css\">";
+		echo "</head><body>";
+		echo "<style>";
+		echo "
+		body {
+			background-color: #99F;			
+		}
+		
+		h1 {
+		font-size: xx-large;
+		color: red;
+		}
+		
+		";
+		echo "</style>";
 		
 		echo "<h1>Make a tiny link:</h1>";
 		

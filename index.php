@@ -5,6 +5,8 @@ $url=$_REQUEST['url'];
 $codepool="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_.";
 
 function inc_c($code,$codeloc) {
+	echo "code[$code]<br>";
+	echo "codepool[$codepool]<br>";
 	$x=strpos($codepool,$code[$codeloc]);
 	$x++;
 	echo "Old[".$codepool[$x-1]."] <br>";

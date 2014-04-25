@@ -1,9 +1,9 @@
 <?
 $db = new mysqli("localhost", "sethcode_iny", "inylink", "sethcode_iny");
 if($db->connect_errno > 0){ die('Unable to connect to database [' . $db->connect_error . ']'); }
-
-
 $url=$_REQUEST['url'];
+$codepool="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_.";
+
 if(!empty($url)) {
 	echo "url=[$url]<br>";
 	$result = $db->query("select * from `system` where `var`='code'");
@@ -11,9 +11,13 @@ if(!empty($url)) {
 		echo $row['var'] . " = [" . $row['val'] ."]<br>";
 		$code=$row['val'];
 	}
-	
 	$x=strlen($code);
 	echo "code_length:[$x]<br>";
+	echo "codepool[$codepool]<br>";
+	$codeloc=strpos($codepool,$code);
+	echo "codeloc[$codeloc]<br>";
+	
+	
 	
 /*	code
 	url

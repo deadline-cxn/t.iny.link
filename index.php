@@ -44,15 +44,12 @@ if(!empty($url)) {
 
 		$result = $db->query("select * from `system` where `var`='code'");
 		while($row = $result->fetch_assoc()){
-			echo $row['var'] . " = [" . $row['val'] ."]<br>";
+			// echo $row['var'] . " = [" . $row['val'] ."]<br>";
 			$code=$row['val'];
 		}
-		echo "old_code[$code]<br>";
+		// echo "old_code[$code]<br>";
 		$code=inc_c($code,strlen($code)-1);
-		echo "new_code[$code]<br>";
-		$url=addslashes($url);
-		$result=$db->query("select * from `link` where `url`='$url'");	
-		$lnk=$result->fetch_object();
+		// echo "new_code[$code]<br>";
 		if(empty($lnk->code)) {
 			$result=$db->query("insert into `link` (`url`,`code`) 
 											values  ('$url','$code');");
@@ -60,12 +57,11 @@ if(!empty($url)) {
 		} else {
 			$code=$lnk->code;
 		}
-	}
-	$result=$db->query("select * from `link` where `code`='$code'");
-	$lnk=$result->fetch_object();
+		$result=$db->query("select * from `link` where `code`='$code'");
+		$lnk=$result->fetch_object();
+	}	
 	
-	echo " OUTLINK:<br>$lnk->url<br>$lnk->code<br>";
-	echo "iny.link url:<br>";
+	echo "LINK:<br>$lnk->url<br>$lnk->code<br>";	
 	echo "<a href=http://iny.link/$lnk->code>http://iny.link/$lnk->code</a><br>";
 	
 /*	code

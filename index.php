@@ -90,9 +90,10 @@ else {
 	else {
 		$result=$db->query("select * from `link` where `code`='$code'");
 		$lnk=$result->fetch_object();
-		echo " OUTLINK:<br>$lnk->url<br>$lnk->code<br>";
-		echo "iny.link url:<br>";
-		echo "<a href=http://iny.link/$lnk->code>http://iny.link/$lnk->code</a><br>";
+		echo "<META http-equiv=\"refresh\" content=\"0;URL=$lnk->url\">";
+		//echo "OUTLINK:<br>$lnk->url<br>$lnk->code<br>";
+		//echo "iny.link url:<br>";
+		//echo "<a href=http://iny.link/$lnk->code>http://iny.link/$lnk->code</a><br>";
 	}
 }
 

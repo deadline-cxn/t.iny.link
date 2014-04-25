@@ -4,7 +4,7 @@ if($db->connect_errno > 0){ die('Unable to connect to database [' . $db->connect
 $url=$_REQUEST['url'];
 $codepool="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_.";
 
-function inc_c($codeloc) {
+function inc_c($code,$codeloc) {
 	$x=strpos($codepool,$code[$codeloc]);	
 	$x++;
 	echo "Old[".$codepool[$x-1]."] <br>";
@@ -26,7 +26,7 @@ if(!empty($url)) {
 	$newcodeloc=$codeloc+1;
 	echo "newcodeloc[$newcodeloc]<br>";
 	
-	inc_c($codeloc);
+	$code=inc_c($code,$codeloc);
 	
 	
 	

@@ -4,7 +4,30 @@ if (isset($argv[1])) {
     inc_c($argv[1],strlen($argv[1])-1);
 	exit();
 }
+function put_ads() {
+		echo "
+<script async src=\"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js\"></script>
+<!-- hey -->
+<ins class=\"adsbygoogle\"
+     style=\"display:inline-block;width:728px;height:90px\"
+     data-ad-client=\"ca-pub-9784595369821502\"
+     data-ad-slot=\"9276856171\"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script> 
 
+<script type=\"text/javascript\">
+				var _gaq = _gaq || [];  
+				_gaq.push(['_setAccount', 'UA-36907330-2']);
+				_gaq.push(['_trackPageview']);
+				(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			  })();
+			</script>
+			";
+}
 function inc_c($code,$codeloc) {
 	$codepool="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_.";
 	//echo "code[$code]\n";
@@ -56,6 +79,8 @@ if(!empty($url)) {
 	echo "LINK:<br>$lnk->url<br>$lnk->code<br>";	
 	echo "<a href=http://iny.link/$lnk->code>http://iny.link/$lnk->code</a><br>";
 	echo "<a href=http://t.iny.link/$lnk->code>http://t.iny.link/$lnk->code</a><br>";
+	
+	put_ads();
 /*	code
 	url
 	hits
@@ -92,7 +117,7 @@ else {
 		
 		echo "<form method=post>LONG URL:<input name=url><input type=submit></form>";
 		
-		
+		put_ads();
 		for($i=0;$i<20;$i++) echo "<p>&nbsp;</p>";
 		echo "Copyright (C)2014 Seth Parson<br>";
 		

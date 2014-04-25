@@ -55,6 +55,7 @@ if(!empty($url)) {
 	}
 	echo "LINK:<br>$lnk->url<br>$lnk->code<br>";	
 	echo "<a href=http://iny.link/$lnk->code>http://iny.link/$lnk->code</a><br>";
+	echo "<a href=http://t.iny.link/$lnk->code>http://t.iny.link/$lnk->code</a><br>";
 /*	code
 	url
 	hits
@@ -81,7 +82,7 @@ else {
 		
 		h1 {
 		font-size: xx-large;
-		color: red;
+		color: yello;
 		}
 		
 		";
@@ -101,9 +102,6 @@ else {
 		$result=$db->query("select * from `link` where `code`='$code'");
 		$lnk=$result->fetch_object();
 		echo "<META http-equiv=\"refresh\" content=\"0;URL=$lnk->url\">";
-		//echo "OUTLINK:<br>$lnk->url<br>$lnk->code<br>";
-		//echo "iny.link url:<br>";
-		//echo "<a href=http://iny.link/$lnk->code>http://iny.link/$lnk->code</a><br>";
 	}
 }
 

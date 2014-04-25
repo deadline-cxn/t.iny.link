@@ -70,9 +70,16 @@ else {
 	
 	if(empty($code)) {
 		echo "<html><head><title>iny.link - shorten your urls</title></head><body>";
-		echo "<div style='align:center;'>Make a tiny link:<br>";
-		echo "<form method=post>LONG URL: <input name=url><input type=submit></form>";
-		echo "Copyright (C)2014 Seth Parson<br></div></body></html>";
+		
+		echo "<h1>Make a tiny link:</h1>";
+		
+		echo "<form method=post>LONG URL:<input name=url><input type=submit></form>";
+		
+		
+		for($i=0;$i<20;$i++) echo "<p>&nbsp;</p>";
+		echo "Copyright (C)2014 Seth Parson<br>";
+		
+		echo "</body></html>";
 	}
 	else {
 		$result=$db->query("select * from `link` where `code`='$code'");

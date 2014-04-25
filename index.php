@@ -36,20 +36,13 @@ if(!empty($url)) {
 	// echo "url=[$url]<br>";	
 	$result = $db->query("select * from `link` where `url`='$url'");
 	$lnk=$result->fetch_object();
-	if(!empty($lnk->url)) {
-		echo "Exists!<br>";
-	}
+	if(!empty($lnk->url)) { }
 	else {
-		echo "Does not exist<br>";
-
 		$result = $db->query("select * from `system` where `var`='code'");
 		while($row = $result->fetch_assoc()){
-			// echo $row['var'] . " = [" . $row['val'] ."]<br>";
 			$code=$row['val'];
 		}
-		// echo "old_code[$code]<br>";
 		$code=inc_c($code,strlen($code)-1);
-		// echo "new_code[$code]<br>";
 		if(empty($lnk->code)) {
 			$result=$db->query("insert into `link` (`url`,`code`) 
 											values  ('$url','$code');");
@@ -59,17 +52,14 @@ if(!empty($url)) {
 		}
 		$result=$db->query("select * from `link` where `code`='$code'");
 		$lnk=$result->fetch_object();
-	}	
-	
+	}
 	echo "LINK:<br>$lnk->url<br>$lnk->code<br>";	
 	echo "<a href=http://iny.link/$lnk->code>http://iny.link/$lnk->code</a><br>";
-	
 /*	code
 	url
 	hits
 	submit_ip
 	submit_date */
-	
 }
 else {
 	$page_url="http";
@@ -79,9 +69,10 @@ else {
 	$code=$xpage[count($xpage)-1];
 	
 	if(empty($code)) {
-		echo "Make a tiny link:<br>";
+		echo "<html><head><title>iny.link - shorten your urls</title></head><body>";
+		echo "<div style='align:center;'>Make a tiny link:<br>";
 		echo "<form method=post>LONG URL: <input name=url><input type=submit></form>";
-		echo "Copyright (C)2014 Seth Parson<br>";
+		echo "Copyright (C)2014 Seth Parson<br></div></body></html>";
 	}
 	else {
 		$result=$db->query("select * from `link` where `code`='$code'");

@@ -5,9 +5,15 @@ if($db->connect_errno > 0){ die('Unable to connect to database [' . $db->connect
 
 $url=$_REQUEST['url'];
 if(!empty($url)) {
-	echo "[$url]";
+	echo "url=[$url]<br>";
 	$result = $db->query("select * from `system` where `var`='code'");
-	while($row = $result->fetch_assoc()){ echo $row['var'] . " = " . $row['val'] . '<br />'; }
+	while($row = $result->fetch_assoc()){
+		echo $row['var'] . " = [" . $row['val'] ."]<br>";
+		$code=$row['val'];
+	}
+	
+	$x=strlen($code);
+	echo "code_length:[$x]<br>";
 	
 /*	code
 	url

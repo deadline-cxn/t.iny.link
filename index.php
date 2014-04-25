@@ -16,6 +16,9 @@ if(!empty($url)) {
 	echo "codepool[$codepool]<br>";
 	$codeloc=strpos($codepool,$code);
 	echo "codeloc[$codeloc]<br>";
+	$newcodeloc=$codeloc+1;
+	echo "newcodeloc[$newcodeloc]<br>";
+	
 	
 	
 	

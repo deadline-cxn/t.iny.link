@@ -16,6 +16,10 @@ function inc_c($code,$codeloc) {
 $db = new mysqli("localhost", "sethcode_iny", "inylink", "sethcode_iny"); if($db->connect_errno > 0){ die('Unable to connect to database [' . $db->connect_error . ']'); }
 $act=$_REQUEST['act'];
 if(!empty($act)) {
+	if($act=="pull") {
+		system("pull");
+		exit;
+	}
 	if($act=="dump") {
 		$r=$db->query("select * from `link`");
 		while($l=$r->fetch_object()) {

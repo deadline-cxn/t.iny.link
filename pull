@@ -1,0 +1,5 @@
+git stash save --keep-index
+git pull git@github.com:sethcoder/iny.link.git
+
+
+

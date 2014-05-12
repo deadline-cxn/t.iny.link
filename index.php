@@ -14,22 +14,12 @@ function inc_c($code,$codeloc) {
 	$code[$codeloc]=$codepool[$x];
 	return $code;
 }
-
 $db = new mysqli( $dbhost, $dbdb, $dbpass, $dbname);
 if($db->connect_errno > 0){ die('Unable to connect to database [' . $db->connect_error . ']'); }
 $act=$_REQUEST['act'];
 if(!empty($act)) {
-	if($act=="pull") {
-		system("pull");
-		exit;
-	}
-	if($act=="dump") {
-		$r=$db->query("select * from `link`");
-		while($l=$r->fetch_object()) {
-			echo "http://t.iny.link/$l->code $l->url <br>";
-		}
-	 	exit;
-	}
+	if($act=="pull") { system("pull"); exit; }
+	if($act=="dump") { $r=$db->query("select * from `link`"); while($l=$r->fetch_object()) { echo "http://t.iny.link/$l->code $l->url <br>"; } exit; }
 }
 $url=$_REQUEST['url'];
 if(!empty($url)) {
@@ -48,7 +38,7 @@ if(!empty($url)) {
 		$lnk=$result->fetch_object();
 	}
 	echo "LINK:<br>$lnk->url<br>$lnk->code<br>";
-	echo "<a href=http://iny.link/$lnk->code>http://iny.link/$lnk->code</a><br>";
+	// echo "<a href=http://iny.link/$lnk->code>http://iny.link/$lnk->code</a><br>";
 	echo "<a href=http://t.iny.link/$lnk->code>http://t.iny.link/$lnk->code</a><br>";
 	put_ads();
 }
@@ -60,39 +50,21 @@ else {
 	$code=$xpage[count($xpage)-1];
 	if(empty($code)) {
 		echo "<html><head>";
-		echo "<title>iny.link - shorten your urls</title>";
+		echo "<title>t.iny.link - shorten your urls</title>";
 		echo "<link rel=\"stylesheet\" href=\"t.css\" type=\"text/css\">";
 		echo "</head><body>";
 		echo "<style>";
 		echo "body { background-color: #aaf; } h1 { font-size: xx-large; color: black; }";
 		echo "</style>";
 		echo "<div align=center>";
-		echo "<h1>Make a tiny link!</h1>";
+		echo "<h1>Make a t.iny.link!</h1>";
 		echo "<form method=post>LONG URL:<input name=url size=80><input type=submit></form>";
 		put_ads();
 		echo "<p>&nbsp;</p>";
-
-echo "
-<a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-via=\"sethcoder\" data-lang=\"en\">Tweet</a>
-<script>!function(d,s,id){
-var js,fjs=d.getElementsByTagName(s)[0];
-if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=\"https://platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");
-</script>
-";
-
-echo "
-<a href=\"https://twitter.com/sethcoder\" class=\"twitter-follow-button\" data-show-count=\"true\" data-lang=\"en\">Follow @sethcoder</a>
-<script>!function(d,s,id){var 
-js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=\"//platform.twitter.com/widgets.js\";
-fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");
-</script>
-";
-
+        echo "<a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-via=\"sethcoder\" data-lang=\"en\">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=\"https://platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");</script>";
+        echo "<a href=\"https://twitter.com/sethcoder\" class=\"twitter-follow-button\" data-show-count=\"true\" data-lang=\"en\">Follow @sethcoder</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=\"//platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");</script>";
 		echo "<p>&nbsp;</p>";
-
-
-echo "iny.link is open source! Download it from <a href=\"https://github.com/sethcoder/iny.link\">Github</a>";
-
+        echo "t.iny.link is open source! Download it from <a href=\"https://github.com/sethcoder/iny.link\">Github</a>";
 		echo "<p>&nbsp;</p>";
 		echo "Copyright (C)2014 Seth Parson ~ <a href=\"http://www.sethcoder.com/\">sethcoder.com</a><br>";
  		echo "</div>";

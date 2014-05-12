@@ -19,7 +19,7 @@ if(!empty($act)) {
 	if($act=="dump") {
 		$r=$db->query("select * from `link`");
 		while($l=$r->fetch_object()) {
-			echo "$l->url http://t.iny.link/$l->code <br>";
+			echo "http://t.iny.link/$l->code $l->url <br>";
 		}
 	 	exit;
 	}

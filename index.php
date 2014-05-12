@@ -66,11 +66,36 @@ else {
 		echo "<style>";
 		echo "body { background-color: #aaf; } h1 { font-size: xx-large; color: black; }";
 		echo "</style>";
-		echo "<h1>Make a tiny link:</h1>";
-		echo "<form method=post>LONG URL:<input name=url><input type=submit></form>";
+		echo "<div align=center>";
+		echo "<h1>Make a tiny link!</h1>";
+		echo "<form method=post>LONG URL:<input name=url size=80><input type=submit></form>";
 		put_ads();
-		for($i=0;$i<20;$i++) echo "<p>&nbsp;</p>";
-		echo "Copyright (C)2014 Seth Parson<br>";
+		echo "<p>&nbsp;</p>";
+
+echo "
+<a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-via=\"sethcoder\" data-lang=\"en\">Tweet</a>
+<script>!function(d,s,id){
+var js,fjs=d.getElementsByTagName(s)[0];
+if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=\"https://platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");
+</script>
+";
+
+echo "
+<a href=\"https://twitter.com/sethcoder\" class=\"twitter-follow-button\" data-show-count=\"true\" data-lang=\"en\">Follow @sethcoder</a>
+<script>!function(d,s,id){var 
+js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=\"//platform.twitter.com/widgets.js\";
+fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");
+</script>
+";
+
+		echo "<p>&nbsp;</p>";
+
+
+echo "iny.link is open source! Download it from <a href=\"https://github.com/sethcoder/iny.link\">Github</a>";
+
+		echo "<p>&nbsp;</p>";
+		echo "Copyright (C)2014 Seth Parson ~ <a href=\"http://www.sethcoder.com/\">sethcoder.com</a><br>";
+ 		echo "</div>";
 		echo "</body></html>";
 	}
 	else {

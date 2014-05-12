@@ -61,7 +61,7 @@ else {
 		echo "<link rel=\"stylesheet\" href=\"t.css\" type=\"text/css\">";
 		echo "</head><body>";
 		echo "<style>";
-		echo "body { background-color: #99F; } h1 { font-size: xx-large; color: yellow; }";
+		echo "body { background-color: #aaf; } h1 { font-size: xx-large; color: black; }";
 		echo "</style>";
 		echo "<h1>Make a tiny link:</h1>";
 		echo "<form method=post>LONG URL:<input name=url><input type=submit></form>";

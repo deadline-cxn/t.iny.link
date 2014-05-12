@@ -1,0 +1,5 @@
+#!/bin/bash
+git commit -a -m "update $1"
+git push github
+
+

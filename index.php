@@ -1,4 +1,5 @@
 <?
+include(".config.php");
 if(isset($argv[1])) { inc_c($argv[1],strlen($argv[1])-1); exit(); }
 function put_ads() {  echo "<script async src=\"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js\"></script><!-- hey --><ins class=\"adsbygoogle\" style=\"display:inline-block;width:728px;height:90px\" data-ad-client=\"ca-pub-9784595369821502\" data-ad-slot=\"9276856171\"></ins> <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script><script type=\"text/javascript\">	var _gaq = _gaq || []; 	_gaq.push(['_setAccount', 'UA-36907330-2']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>"; }
 function inc_c($code,$codeloc) {
@@ -13,7 +14,9 @@ function inc_c($code,$codeloc) {
 	$code[$codeloc]=$codepool[$x];
 	return $code;
 }
-$db = new mysqli("localhost", "sethcode_iny", "inylink", "sethcode_iny"); if($db->connect_errno > 0){ die('Unable to connect to database [' . $db->connect_error . ']'); }
+
+$db = new mysqli( $dbhost, $dbdb, $dbpass, $dbname);
+if($db->connect_errno > 0){ die('Unable to connect to database [' . $db->connect_error . ']'); }
 $act=$_REQUEST['act'];
 if(!empty($act)) {
 	if($act=="pull") {

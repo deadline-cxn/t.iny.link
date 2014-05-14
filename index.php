@@ -19,7 +19,19 @@ if($db->connect_errno > 0){ die('Unable to connect to database [' . $db->connect
 $act=$_REQUEST['act'];
 if(!empty($act)) {
 	if($act=="pull") { system("pull"); exit; }
-	if($act=="dump") { $r=$db->query("select * from `link`"); while($l=$r->fetch_object()) { echo "http://t.iny.link/$l->code $l->url <br>"; } exit; }
+	if($act=="dump") {
+		$r=$db->query("select * from `link`");
+                echo "<a href=\"http://t.iny.link\">Back to t.iny.link</a>";
+		echo "<table border=0>";
+		echo "<tr><td>Short Link</td><td>Submitter IP</td><td>Hits</td><td>Long Link</td></tr>";
+		while($l=$r->fetch_object()) {
+			if(empty($l->submit_ip)) $l->submit_ip="(unknown)";
+                        if($l->submit_date=="0000-00-00 00:00:00") $l->submit_date="(unknown)";
+			echo"<tr><td>http://t.iny.link/$l->code</td><td>$l->submit_ip</td><td>$l->hits</td><td>$l->url </td></tr>";
+		} 
+		echo "</table>";
+		exit; 
+	}
 }
 $url=$_REQUEST['url'];
 if(!empty($url)) {
@@ -31,15 +43,15 @@ if(!empty($url)) {
 		while($row = $result->fetch_assoc()){ $code=$row['val']; }
 		$code=inc_c($code,strlen($code)-1);
 		if(empty($lnk->code)) {
-			$result=$db->query("insert into `link` (`url`,`code`) values  ('$url','$code');");
+			$sip=$_SERVER['REMOTE_ADDR'];
+			$result=$db->query("insert into `link` (`url`,`code`,`submit_ip`) values ('$url','$code','$sip');");
 			$result=$db->query("update `system` set `val`='$code' where `var`='code'");
 		} else { $code=$lnk->code; }
 		$result=$db->query("select * from `link` where `code`='$code'");
 		$lnk=$result->fetch_object();
 	}
-	echo "LINK:<br>$lnk->url<br>$lnk->code<br>";
-	// echo "<a href=http://iny.link/$lnk->code>http://iny.link/$lnk->code</a><br>";
-	echo "<a href=http://t.iny.link/$lnk->code>http://t.iny.link/$lnk->code</a><br>";
+	echo "LINK: $lnk->url<br>";
+	echo "T.INY.LINK: <a href=http://t.iny.link/$lnk->code>http://t.iny.link/$lnk->code</a><br>";
 	put_ads();
 }
 else {
@@ -61,10 +73,13 @@ else {
 		echo "<form method=post>LONG URL:<input name=url size=80><input type=submit></form>";
 		put_ads();
 		echo "<p>&nbsp;</p>";
-        echo "<a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-via=\"sethcoder\" data-lang=\"en\">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=\"https://platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");</script>";
-        echo "<a href=\"https://twitter.com/sethcoder\" class=\"twitter-follow-button\" data-show-count=\"true\" data-lang=\"en\">Follow @sethcoder</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=\"//platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");</script>";
+                echo "<a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-via=\"sethcoder\" data-lang=\"en\">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=\"https://platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");</script>";
+                echo "<a href=\"https://twitter.com/sethcoder\" class=\"twitter-follow-button\" data-show-count=\"true\" data-lang=\"en\">Follow @sethcoder</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=\"//platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");</script>";
 		echo "<p>&nbsp;</p>";
-        echo "t.iny.link is open source! Download it from <a href=\"https://github.com/sethcoder/iny.link\">Github</a>";
+                echo "t.iny.link is open source! Download it from <a 
+href=\"https://github.com/sethcoder/iny.link\">Github</a>";
+		echo "<p>&nbsp;</p>";
+		echo "<p><a href=\"t.iny.link?act=dump\">Statistics</a></p>";
 		echo "<p>&nbsp;</p>";
 		echo "Copyright (C)2014 Seth Parson ~ <a href=\"http://www.sethcoder.com/\">sethcoder.com</a><br>";
  		echo "</div>";
@@ -73,6 +88,8 @@ else {
 	else {
 		$result=$db->query("select * from `link` where `code`='$code'");
 		$lnk=$result->fetch_object();
+                $lnk->hits=$lnk->hits+1;
+                $db->query("update `link` set `hits` = '$lnk->hits' where `code`='$lnk->code'");
 		echo "<META http-equiv=\"refresh\" content=\"0;URL=$lnk->url\">";
 	}
 }

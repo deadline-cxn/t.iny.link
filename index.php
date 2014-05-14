@@ -23,11 +23,11 @@ if(!empty($act)) {
 		$r=$db->query("select * from `link`");
                 echo "<a href=\"http://t.iny.link\">Back to t.iny.link</a>";
 		echo "<table border=0>";
-		echo "<tr><td>Short Link</td><td>Submitter IP</td><td>Hits</td><td>Long Link</td></tr>";
+		echo "<tr><td>Short Link</td><td>Hits</td><td>Long Link</td></tr>";
 		while($l=$r->fetch_object()) {
-			if(empty($l->submit_ip)) $l->submit_ip="(unknown)";
-                        if($l->submit_date=="0000-00-00 00:00:00") $l->submit_date="(unknown)";
-			echo"<tr><td>http://t.iny.link/$l->code</td><td>$l->submit_ip</td><td>$l->hits</td><td>$l->url </td></tr>";
+				// if(empty($l->submit_ip)) $l->submit_ip="(unknown)";
+				// if($l->submit_date=="0000-00-00 00:00:00") $l->submit_date="(unknown)";
+			echo"<tr><td>http://t.iny.link/$l->code</td><td>$l->hits</td><td>$l->url </td></tr>";
 		} 
 		echo "</table>";
 		exit; 
@@ -76,12 +76,11 @@ else {
                 echo "<a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-via=\"sethcoder\" data-lang=\"en\">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=\"https://platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");</script>";
                 echo "<a href=\"https://twitter.com/sethcoder\" class=\"twitter-follow-button\" data-show-count=\"true\" data-lang=\"en\">Follow @sethcoder</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=\"//platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");</script>";
 		echo "<p>&nbsp;</p>";
-                echo "t.iny.link is open source! Download it from <a 
-href=\"https://github.com/sethcoder/iny.link\">Github</a>";
+                echo "t.iny.link is open source! Download it from <a href=\"http://t.iny.link/h\">http://t.iny.link/h</a>";
 		echo "<p>&nbsp;</p>";
-		echo "<p><a href=\"t.iny.link?act=dump\">Statistics</a></p>";
+		echo "<p><a href=\"http://t.iny.link?act=dump\">Statistics</a></p>";
 		echo "<p>&nbsp;</p>";
-		echo "Copyright (C)2014 Seth Parson ~ <a href=\"http://www.sethcoder.com/\">sethcoder.com</a><br>";
+		echo "Copyright (C)2014 Seth Parson ~ <a href=\"http://t.iny.link/3\">http://t.iny.link/3</a><br>";
  		echo "</div>";
 		echo "</body></html>";
 	}

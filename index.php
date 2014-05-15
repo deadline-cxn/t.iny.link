@@ -71,10 +71,42 @@ else {
 		echo "<div align=center>";
 		echo "<h1>Make a t.iny.link!</h1>";
 		echo "<form method=post>LONG URL:<input name=url size=80><input type=submit></form>";
+
+		echo "<a href=\"https://chrome.google.com/webstore/detail/tinylink/faejefmbcehfegajdeliofenfneodopa/details\" target=_blank><img src=favicon.png border=0>Install Google Chrome Extension</a><br><br><br>";
+
 		put_ads();
 		echo "<p>&nbsp;</p>";
                 echo "<a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-via=\"sethcoder\" data-lang=\"en\">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=\"https://platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");</script>";
                 echo "<a href=\"https://twitter.com/sethcoder\" class=\"twitter-follow-button\" data-show-count=\"true\" data-lang=\"en\">Follow @sethcoder</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=\"//platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");</script>";
+?>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1421334944783676&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href="http://t.iny.link/" data-layout="button_count" data-action="like"  data-show-faces="true" data-share="true"></div>
+
+<!-- Place this tag where you want the +1 button to render. -->
+<div class="g-plusone" data-size="medium"></div>
+
+<!-- Place this tag after the last +1 button tag. -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+
+<script type="text/javascript" src="http://www.reddit.com/static/button/button1.js"></script>
+
+<?
+
 		echo "<p>&nbsp;</p>";
                 echo "t.iny.link is open source! Download it from <a href=\"http://t.iny.link/h\">http://t.iny.link/h</a>";
 		echo "<p>&nbsp;</p>";

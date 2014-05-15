@@ -50,8 +50,7 @@ if(!empty($url)) {
 		$result=$db->query("select * from `link` where `code`='$code'");
 		$lnk=$result->fetch_object();
 	}
-	echo "LINK: $lnk->url<br>";
-	echo "T.INY.LINK: <a href=http://t.iny.link/$lnk->code>http://t.iny.link/$lnk->code</a><br>";
+	echo "<a href=http://t.iny.link/$lnk->code>http://t.iny.link/$lnk->code</a><br>";
 	put_ads();
 }
 else {

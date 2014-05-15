@@ -71,7 +71,8 @@ else {
 		echo "<h1>Make a t.iny.link!</h1>";
 		echo "<form method=post>LONG URL:<input name=url size=80><input type=submit></form>";
 
-		echo "<a href=\"https://chrome.google.com/webstore/detail/tinylink/faejefmbcehfegajdeliofenfneodopa/details\" target=_blank><img src=favicon.png border=0>Install Google Chrome Extension</a><br><br><br>";
+		echo "<a href=\"https://chrome.google.com/webstore/detail/tinylink/faejefmbcehfegajdeliofenfneodopa/details\" target=_blank><img src=favicon.png border=0 width=32 height=32>Install Google Chrome 
+Extension</a><br><br><br>";
 
 		put_ads();
 		echo "<p>&nbsp;</p>";

@@ -2,20 +2,12 @@
 include(".config.php"); // .config.php stores $dbhost, $dbdb, $dbpass, and $dbname for mysql operations
 ?>
 <html><head><title>t.iny.link - shorten your urls</title></head><body> 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-51059708-1', 'iny.link');
-  ga('send', 'pageview');
-</script>
+<script>  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');  ga('create', 'UA-51059708-1', 'iny.link');  ga('send', 'pageview'); </script>
 <?
-
 if(isset($argv[1])) { inc_c($argv[1],strlen($argv[1])-1); exit(); }
 function put_ads() {  echo "<script async src=\"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js\"></script><!-- hey --><ins class=\"adsbygoogle\" style=\"display:inline-block;width:728px;height:90px\" data-ad-client=\"ca-pub-9784595369821502\" data-ad-slot=\"9276856171\"></ins> <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script><script type=\"text/javascript\">	var _gaq = _gaq || []; 	_gaq.push(['_setAccount', 'UA-36907330-2']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>"; }
 function inc_c($code,$codeloc) {
-        $codepool="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_.";
+	$codepool="0123456789abcdefghijklmnopqrstuvwxyz-_.";
 	$x=strpos($codepool,$code[$codeloc]);
 	$ox=$x; $x++;
 	if($x>strlen($codepool)-1) {
@@ -30,46 +22,49 @@ $db = new mysqli( $dbhost, $dbdb, $dbpass, $dbname);
 if($db->connect_errno > 0){ die('Unable to connect to database [' . $db->connect_error . ']'); }
 $act=$_REQUEST['act'];
 if(!empty($act)) {
-	if($act=="pull") { system("pull"); exit; }
+	if($act=="pull") { echo system("pull"); exit; }
 	if($act=="dump") {
-		$r=$db->query("select * from `link`");
-                echo "<a href=\"http://t.iny.link\">Back to t.iny.link</a>";
+		$code=$_REQUEST['code']; 
+		$srch=""; if(!empty($code)) $srch= "where `code`='$code'";
+		$r=$db->query("select * from `link` $srch");		
+		echo "<a href=\"http://t.iny.link\">Back to t.iny.link</a>";		
+		echo "<form method=post>enter t.iny.link code:<input name=code size=80 value=$code><input type=hidden  name=act value=dump><input type=submit></form>";
+		
+		
 		echo "<table border=0>";
 		echo "<tr><td>Short Link</td><td>Hits</td><td>Long Link</td></tr>";
 		while($l=$r->fetch_object()) {
-				// if(empty($l->submit_ip)) $l->submit_ip="(unknown)";
-				// if($l->submit_date=="0000-00-00 00:00:00") $l->submit_date="(unknown)";
 			echo"<tr><td>http://t.iny.link/$l->code</td><td>$l->hits</td><td>$l->url </td></tr>";
 		}
 		echo "</table>";
 		exit; 
 	}
 }
-
 $url=$_REQUEST['url'];
-
 if(!empty($url)) {
 	$result = $db->query("select * from `link` where `url`='$url'");
 	$lnk=$result->fetch_object();
-	if(!empty($lnk->url)) { }
-	else {
+	$result->close();
+	if(empty($lnk->url)) { 
 		$result = $db->query("select * from `system` where `var`='code'");
-		while($row = $result->fetch_assoc()) {
-			$code=$row['val'];
-		}
+		$crow = $result->fetch_object();
+		$result->close();
+		$code=$crow->val;
 		$code=inc_c($code,strlen($code)-1);
 		if(empty($lnk->code)) {
 			$sip=$_SERVER['REMOTE_ADDR'];
-			$result=$db->query("insert into `link` (`url`,`code`,`submit_ip`) values ('$url','$code','$sip');");
+			$result=$db->query("insert into `link` (`url`,`code`,`submit_ip`) values ('$url','$code','$sip');");			
 			$result=$db->query("update `system` set `val`='$code' where `var`='code'");
 		}
 		else {
 			$code=$lnk->code;
 		}
-		$result=$db->query("select * from `link` where `code`='$code'");
+		$result=$db->query("select * from `link` where `code`='$code'");		
 		$lnk=$result->fetch_object();
+		$result->close();
 	}
-	echo "<br>$lnk->url =  <a href=http://t.iny.link/$lnk->code>http://t.iny.link/$lnk->code</a><br>";// 	put_ads();
+echo "<br>$lnk->url = <a href=http://t.iny.link/$lnk->code>http://t.iny.link/$lnk->code</a><br>";
+		put_ads();
 }
 else {
 	$page_url="http";
